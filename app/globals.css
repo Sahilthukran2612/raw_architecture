@@ -8,19 +8,31 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-helvetica);
+  --font-serif: var(--font-neutra);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #0a0a0a;
+    --background: #ededed;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }
+
+/* Use different fonts for different elements */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-neutra);
+  font-weight: 700;
+}
+
+/* For decorative/display text */
+.display {
+  font-family: var(--font-helvetica);
+}
+
