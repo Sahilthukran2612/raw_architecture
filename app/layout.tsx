@@ -18,7 +18,7 @@ export default function RootLayout({
       lang="en"
       className={`${helvetica.variable} ${neutra.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col max-w-7xl  mx-auto">
+      <body className="min-h-full flex flex-col max-w-7xl lg:max-w-full  mx-auto">
         <NavBar />
         {children}
       </body>

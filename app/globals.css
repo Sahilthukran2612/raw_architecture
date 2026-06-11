@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --card: #F8F8FF;
 }
 
 @theme inline {
@@ -10,12 +11,14 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-helvetica);
   --font-serif: var(--font-neutra);
+  --color-card: var(--card);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground: #0a0a0a;
-    --background: #ededed;
+    /* --foreground: #ffffff;
+    --background: #171717; */
+    /* --card:#0b0b0c; */
   }
 }
 
@@ -26,10 +29,10 @@ body {
 }
 
 /* Use different fonts for different elements */
-h1, h2, h3, h4, h5, h6 {
+/* h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-neutra);
   font-weight: 700;
-}
+} */
 
 /* For decorative/display text */
 .display {
