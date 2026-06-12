@@ -1,46 +1,86 @@
-"use client"
-import React, {useRef} from 'react'
-import { motion, useScroll, useTransform } from 'motion/react'
-import HeroCorousal from './HeroCorousal';
+"use client";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
+import HeroCorousal from "./HeroCorousal";
 
- export default function Hero() {
-  const ref = useRef(null)
- const {scrollYProgress} = useScroll({
-  target: ref,
-  offset: ["start end", "end start"]
- })
+export default function Hero() {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
 
- const y = useTransform(
+  // Smooth parallax translation for the text container
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-scrollYProgress,
-[0,1],
-[0, 100],
- )
+  // Entrance variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const titleWordVariants = {
+    hidden: { opacity: 0, y: 50, scale: 0.98 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 90,
+        damping: 15,
+      },
+    },
+  };
+
+  const subtitleVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1],
+        delay: 0.45,
+      },
+    },
+  };
+
   return (
-    <section ref={ref}
-    
-    className='flex flex-col gap-12 w-full '>
-      <motion.div 
-      style={{
-        y,
-      }}
-      className="  mx-auto w-full text-left md:text-center   ">
-        <motion.div
-
-          initial={{ opacity: 0, y: 30, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.3, type: "tween" }}
-          className="text-foreground text-[124px] leading-none  md:text-[176px] wrap-normal  font-serif font-light sm:leading-[1.3] tracking-normal"
+    <section ref={sectionRef} className="flex flex-col gap-8 w-full pt-16 md:pt-24 overflow-hidden">
+      <motion.div
+        style={{ y: textY, opacity: textOpacity }}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="mx-auto w-full text-left md:text-center px-6 md:px-12 flex flex-col gap-6"
+      >
+        <div className="overflow-hidden">
+          <motion.h1
+            variants={titleWordVariants}
+            className="text-foreground text-[80px] leading-tight md:text-[140px] xl:text-[160px] font-serif font-light tracking-tight"
+          >
+            Raw - Vision
+          </motion.h1>
+        </div>
+        
+        <motion.p
+          variants={subtitleVariants}
+          className="font-sans text-sm md:text-lg lg:text-xl md:mx-auto md:max-w-2xl text-foreground/75 leading-relaxed"
         >
-          Raw - Vision
-        </motion.div>
-        <p className="font-sans text-sm md:text-xl px-4 sm:px-0 sm:mx-auto md:w-xl w-sm  bg-clip-text bg-linear-to-br from-foreground via-foreground/30 to-foreground/10 text-transparent">
-          Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet
-          consectetur adipiscing elit quisque faucibus.
-        </p>
+          We shape spaces that breathe — blending raw materials, structural integrity, 
+          and architectural design into timeless spaces that feel both considered and alive.
+        </motion.p>
       </motion.div>
+      
       <HeroCorousal />
     </section>
   );
 }
-

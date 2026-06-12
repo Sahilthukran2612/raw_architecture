@@ -2,6 +2,7 @@ import Hero from '@/components/Hero'
 import React from 'react'
 import AboutUs from './(Home)/AboutUs'
 import OurExperience from './(Home)/Our-expertise'
+import Shape from './(Home)/Shape'
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <Hero />
       <AboutUs />
       <OurExperience />
+      <Shape />
 
 
     </div>
