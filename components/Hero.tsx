@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform, Variants } from "motion/react";
 import HeroCorousal from "./HeroCorousal";
 
 export default function Hero() {
@@ -15,7 +15,7 @@ export default function Hero() {
   const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   // Entrance variants
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -26,7 +26,7 @@ export default function Hero() {
     },
   };
 
-  const titleWordVariants = {
+  const titleWordVariants: Variants = {
     hidden: { opacity: 0, y: 50, scale: 0.98 },
     visible: {
       opacity: 1,
@@ -40,7 +40,7 @@ export default function Hero() {
     },
   };
 
-  const subtitleVariants = {
+  const subtitleVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
